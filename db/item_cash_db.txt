@@ -21,8 +21,8 @@
 
 // 0: New (Eventually)
 //0,17613,5000	//Chronosian_Lucky_Eggl (20150819)
-0,33002,5000	//
-0,33000,7500
+0,33002,5000	//Ahoy Christmas Song
+0,33000,7500	//Ahoy Scroll
 
 // 1: Headgear
 //1,18934 ,12500   //Fox Ears Bell Ribbon
