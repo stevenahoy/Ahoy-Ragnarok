@@ -1,0 +1,101 @@
+
+/*
+function	script	F_Rand	{
+	return getarg(rand(getargcount()));
+}
+*/
+
+prontera,150,185,5	script	Spooky Machine#iro	2_DROP_MACHINE,{
+	mes "[Spooky Machine]";
+	if (.cooldown && cd_bucler_refine > gettimetick(2)) {
+		mes "Come again after tomorrow.";
+	}
+	else if (BaseLevel < 45) {
+		mes "Come again when you reach level 45.";
+	}
+	else if (!countitem(.item_id)) {
+		mes "Equip the "+getitemname(.item_id)+" and talk to me, and I'll upgrade it for prizes!";
+		mes "Also be sure you have 'BOO' spirit when you upgrade! to get more success!";
+		getitem .item_id,1;
+		next;
+		mes "[Spooky Machine]";
+		mes "It will attempt to upgrade it as high as it will go.";
+		mes "Depending on what upgrade level the item breaks at you will get a free item!";
+		mes "If the buckler is upgraded to +10 or higher it gives a mystery costume!";
+		if (.zeny_cost_per_refine) {
+			next;
+			mes "[Spooky Machine]";
+			mes "For your information, each refine attempts will cost you "+.zeny_cost_per_refine+" Zeny.";
+			mes "Ensure you have enough Zeny.";
+		}	
+		next;
+	}
+	else if (!isequipped(.item_id)) {
+		mes "Equip the "+getitemname(.item_id)+" and talk to me, and I'll upgrade it for prizes!";
+	}
+	else {   
+		mes "And here we go!";
+		mes "Time to upgrade that Buckler.";
+		next;
+		while(isequipped(.item_id)) {
+			progressbar "0xFFFFFF",2;
+			if (.zeny_cost_per_refine) {
+				if (Zeny < .zeny_cost_per_refine) {
+					mes "[Spooky Machine]";
+					mes "You run out of Zeny.";
+					close;
+				}
+				Zeny -= .zeny_cost_per_refine;
+			}
+			.@refine = getequiprefinerycnt(EQI_HAND_L);
+			if (rand(100) < getequippercentrefinery(EQI_HAND_L) && .@refine < 10) {
+				successrefitem EQI_HAND_L;
+			}
+			else {
+				mes "[Spooky Machine]";
+				mes "You manage to refine to +"+.@refine;
+				delitem .item_id,countitem(.item_id);
+				specialeffect EF_REFINEFAIL;
+				if (.cooldown) {
+					cd_bucler_refine = gettimetick(2) + .cooldown;
+					mes "Try again tomorrow.";
+				}
+				switch (.@refine) {
+					default:
+						mes "No rewards with such achievement.";
+						break;
+					case 4:
+						getitem 7515,3;
+						break;
+					case 5:
+						getitem 608,1;
+						break;
+					case 6:
+						.@food_id = F_Rand(12075,12080,12095,12090,12085,12100);
+						getitem .@food_id,1;
+						break;
+					case 7:
+						getitem 6495,1;
+						break;
+					case 8:
+						getitem 18716,1;
+						break;
+					case 9:
+						getitem 14545,3;
+						break;
+					case 10:
+						getitem 20285,1;
+						break;
+				}
+				close;
+			}
+		}
+	}
+	close;
+	
+	OnInit:
+		.item_id = 2136;
+		.zeny_cost_per_refine = 100000;
+		.cooldown = (22 * 60 * 60); // 22 hours.
+		end;
+}

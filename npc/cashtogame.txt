@@ -1,0 +1,16 @@
+-	script	RetornoPaypal	-1,{
+
+OnPCLoginEvent:
+	
+	query_sql "SELECT `balance` FROM `cp_credits`  WHERE `account_id` = '"+getcharid(3)+"'",.@balance;
+	
+	if(.@balance > 0){
+		set #CASHPOINTS,#CASHPOINTS+.@balance;
+		dispbottom "ROPs Creditados";
+		query_sql "UPDATE `cp_credits` set `balance` = '0'  WHERE `account_id` = '"+getcharid(3)+"'";
+		end;
+	}
+
+end;
+	
+}

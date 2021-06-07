@@ -1,0 +1,30 @@
+-	script	rAthena	-1,{
+OnPCBaseLvUpEvent:
+	setarray .@rewards[0],12209,662,12923; // change this with your own reward
+	setarray .@hadiah[0],20511; // change this with your own reward
+		if (BaseLevel == 5 || BaseLevel == 10 || BaseLevel == 15 || 
+		BaseLevel == 20 || BaseLevel == 25 || BaseLevel == 30 || 
+		BaseLevel == 35 || BaseLevel == 40 || BaseLevel == 45 ||
+		BaseLevel == 50 || BaseLevel == 55 || BaseLevel == 60 ||
+		BaseLevel == 65 || BaseLevel == 70 || BaseLevel == 75 ||
+		BaseLevel == 80 || BaseLevel == 85 || BaseLevel == 90 || 
+		BaseLevel == 95 || BaseLevel == 99){
+			getitem .@rewards[0],1;
+			getitem .@rewards[1],1;
+			getitem .@rewards[2],1;
+			dispbottom "Congrats! You reached level "+BaseLevel+"!";
+			end;
+		}
+		else {
+			end;
+		}
+		if (BaseLevel == 100){
+			getitem .@hadiah[0],1;
+			dispbottom "Congrats! You reached level "+BaseLevel+"!";
+			end;
+		}
+		else {
+			end;
+		}
+	end;
+}

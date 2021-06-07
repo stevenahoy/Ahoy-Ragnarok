@@ -1,0 +1,28 @@
+function	script	ahoybrokenbox	{
+	setarray .i1[0],14232,12815; // Common Items
+	set .i1rand,rand(0,1); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[0],17272,17274,17273,17275,17270,17271; // Rare Items
+	set .i2rand,rand(0,1); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[0],12691,12693,12690,12246,20132,20407; // Super Rare Items
+	set .i3rand,rand(0,1); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+
+		// Super Rare Item 1%
+		if (.chance == 1){
+		getitem .i3[.i3rand],1;
+		announce "["+strcharinfo(0)+"] won a ["+getitemname(.i3[.i3rand])+"] from the Ahoy Broken Box.",0;
+		end;
+		} 
+
+		// Rare Item 10%
+		else if (.chance <= 2 && .chance >= 11){
+		getitem .i2[.i2rand],1;
+		announce "["+strcharinfo(0)+"] won a ["+getitemname(.i2[.i2rand])+"] from the Ahoy Broken Box.",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; }
+}

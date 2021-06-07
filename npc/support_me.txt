@@ -1,0 +1,17 @@
+prontera,167,190,4	script	Helper	951,{
+
+mes "selamat datang!!";
+
+mes "terima kasih sudah bergabung di TeMPoison Ragnarok.";
+next;
+mes "kamu masih baru ? oke sekarang klik link next untuk mengambil Redeem Code kamu";
+mes "ingat saat masukan code character harus dalam keadaan logout supaya tidak terjadi hal yang tidak di inginkan";
+next;
+mes " ";
+mes "masukan kode : ahoyganteng";
+mes "<URL>Redeem Code<INFO>http://ahoyganteng.xyz/cp/?module=freebies</INFO></URL>";
+next;
+mes "terima kasih , selamat bermain ";
+close;
+
+}

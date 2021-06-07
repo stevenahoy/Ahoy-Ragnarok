@@ -1,0 +1,29 @@
+function	script	christmas	{
+	mes "What Song Would you like to play?";
+	switch(select("White Christmas:Come On My Deer!!:Welcome, My lord:Silver Bell:Don't Cry , Baby:Jingle Bell on Ragnarok:Theme Of Lutie / Snow In My Heart:None")) {
+	case 1:
+		playBGMall "53";
+		close;
+	case 2:
+		playBGMall "54";
+		close;
+	case 3:
+		playBGMall "55";
+		close;
+	case 4:
+		playBGMall "56";
+		close;
+	case 5:
+		playBGMall "57";
+		close;
+	case 6:
+		playBGMall "58";
+		close;
+	case 7:
+		playBGMall "59";
+		close;
+	case 8:
+		mes "Okay Bye Cya Later";
+		close;
+	}
+}

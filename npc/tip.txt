@@ -1,0 +1,20 @@
+-	script	TipOftheDay	-1,{
+
+OnPCLoginEvent:
+
+        switch(rand(1,3)) {
+	case 1:
+	mes "[Ahoy Ganteng loh....]";
+		end;
+		
+	case 2:
+	mes "[Selalu update ragnarok kamu dengan patcher ya...]";
+		end;
+	
+	case 3:
+	mes "[Claim hadiah kamu dengan masukan code : ahoyganteng dan dapatkan free cash]";
+		end;
+		
+}
+ end;
+	}

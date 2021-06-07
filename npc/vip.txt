@@ -1,0 +1,243 @@
+function	script	vip	{
+if (getgroupid()<4) {
+goto Prem;
+}
+
+set .@Timer, vip_status(VIP_STATUS_EXPIRE);
+
+mes "[ VIP NPC ]";
+mes "Welcome "+strcharinfo(0)+",";
+mes "Please choose the menu.";
+mes "^FF0000Your VIP Status will Expire at:^000000";
+mes gettimestr("%Y-%m/%d %H:%M:%S",21,vip_status(VIP_STATUS_EXPIRE));
+mes "^FF0000Time Left: ^000000" + callfunc("Time2Str",.@Timer);
+next;
+switch(select("Buy items:Reset Stat And Skill:Buff VIP:No, thanks.")) {
+	case 1:
+		mes "Choose items do you wants.";
+		goto item_list;
+
+		item_list:
+		menu "Greed Scroll 30 Box 30000",greed,"Unlimited Flywing Box 20000",unli,"HP Pil 10000 Zeny",HP_PILL,"SP Pil 10000 Zeny",SP_PILL,"Authoritative Badge 10000 Zeny",Authoritative;
+
+		greed:
+		set .@amount, countitem(13621);
+		if (zeny < 30000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitem 13621,1;
+		set zeny,zeny-30000;
+		}
+		close;
+		
+		unli:
+		set .@amount, countitem(17229);
+		if (zeny < 20000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitem 17229,1;
+		set zeny,zeny-20000;
+		}
+		close;
+
+		HP_PILL:
+		set .@amount, countitem(12274);
+		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitem 12274,10;
+		set zeny,zeny-10000;
+		}
+		close;
+
+		SP_PILL:
+		set .@amount, countitem(12275);
+		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitem 12275,10;
+		set zeny,zeny-10000;
+		}
+		close;
+
+		Authoritative:
+		set .@amount, countitem(662);
+		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		else if (.@amount >= 1) mes "You still have the item.";
+		else{
+		getitem 662,10;
+		set zeny,zeny-10000;
+		}
+		close;
+
+case 2:
+        mes "[Reset Stat and Skill]";
+        mes "Reset Stats: 5,000z";
+        mes "Reset Skills: 5,000z";
+        mes "Reset Both: 9,000z";
+        mes "Please select the service you want:";
+        next;
+        switch(select("^FF3355Reset Skills:Reset Stats:Reset Both^000000:Quit")) {
+                case 1:
+                        mes "[Reset Stat and Skill]";
+                        if (Zeny < 5000) {
+                                mes "Sorry, you don't have enough Zeny.";
+                                close;
+                        }
+                        mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+                        set Zeny,zeny-5000;
+                        ResetSkill;
+                        close;
+                case 2:
+                        mes "[Reset Stat and Skill]";
+                        if (Zeny < 5000) {
+                                mes "Sorry, you don't have enough Zeny.";
+                                close;
+                        }
+                        mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+                        set Zeny,zeny-5000;
+                        ResetStatus;
+                        close;
+                case 3:
+                        mes "[Reset Stat and Skill]";
+                        if (Zeny < 9000) {
+                                mes "Sorry, you don't have enough Zeny.";
+                                close;
+                        }
+                        mes "Alright, here we go now.. Remember, changes won't take effect until you log back on!";
+                        set Zeny,zeny-9000;
+                        ResetSkill;
+                        ResetStatus;
+                        close;
+			}
+
+	case 3:
+mes "[^FF0000 Premium User ^000000]";
+mes "";
+mes "What do you want me to do?";
+next;
+menu "Full Buffs",L_FB,"Nothing",L_No;
+ 
+ 
+L_No:
+mes "[^FF0000 Premium User ^000000]";
+mes "Okay Bye!!";
+close;
+ 
+L_Warp:
+if(getgroupid() > 4) {
+warp "bossnia_01",0,0;
+end;
+}
+  
+L_FB:
+if(getgroupid() > 4) {
+mes "[^FF0000 Premium User ^000000]";
+mes "There you go!";
+if( @delay_buff ) end;
+ 
+percentheal 100,100;
+ 
+skilleffect 34,0; sc_start SC_BLESSING,3200000,10;
+skilleffect 29,0; sc_start SC_INCREASEAGI,3200000,10;
+sc_start SC_STRFood,3200000,10;
+sc_start SC_AGIFood,3200000,10;
+sc_start SC_VITFood,3200000,10;
+sc_start SC_INTFood,3200000,10;
+sc_start SC_DEXFood,3200000,10;
+sc_start SC_LUKFood,3200000,10;
+sc_start SC_HitFood,3200000,30;
+sc_start SC_FleeFood,3200000,30;
+sc_start SC_BATKFood,3200000,10;
+sc_start SC_MATKFood,3200000,10;
+sc_start SC_ATKPOTION,3200000,40;
+sc_start SC_INCALLSTATUS+6,3200000,10;
+ 
+
+ 
+@delay_buff++;
+sleep2 1000;
+@delay_buff = 0;
+close;
+}
+
+	case 4:
+	mes "See you next time.";
+	close;
+	}
+
+Prem:
+set .@day,10000;
+set .@week,50000;
+set .@month,100000;
+if (getgroupid()>60) {
+mes "[ VIP NPC ]";
+mes "Sorry,GM staff not allowed to use this feature.";
+close;
+}
+
+mes "[ VIP NPC ]";
+mes "Price List VIP.";
+mes "2 Month Register at "+.@month+" cash point";
+mes "your cureent cashpoint "+#CASHPOINTS+".";
+next;
+switch(select("register 2 Month:No, Thanks.")) {
+case 1:
+if (#CASHPOINTS < .@month) {
+mes "[ VIP NPC ]";
+mes "Your cash points not enough,";
+mes ""+.@month+" cash point to use this feature.";
+close;
+}
+//set #CASHPOINTS, #CASHPOINTS - .@month;
+atcommand "@vip +2m "+strcharinfo(0)+"";
+mes "[ VIP NPC ]";
+mes "Enjoy your service.";
+dispbottom "your cureent cashpoint "+#CASHPOINTS+".";
+close;
+
+case 4:
+mes "[ VIP NPC ]";
+mes "See You next time.";
+close;
+}
+}
+
+// --------------------------------------------------
+//	Duplicates:
+// --------------------------------------------------
+//alberta,33,240,4	duplicate(VIP System)	VIP System#alb	109
+//aldebaran,146,116,4	duplicate(VIP System)	VIP System#alde	109
+//amatsu,205,87,4	duplicate(VIP System)	VIP System#ama	109
+//ayothaya,212,172,6	duplicate(VIP System)	VIP System#ayo	109
+//comodo,191,161,4	duplicate(VIP System)	VIP System#com	109
+//einbech,55,36,6	duplicate(VIP System)	VIP System#einbe	109
+//einbroch,72,206,4	duplicate(VIP System)	VIP System#einbr	109
+//geffen,127,66,4	duplicate(VIP System)	VIP System#gef	109
+//gonryun,162,126,4	duplicate(VIP System)	VIP System#gon	109
+//hugel,102,148,4	duplicate(VIP System)	VIP System#hug	109
+//izlude,128,152,4	duplicate(VIP System)	VIP System#izl	109	//Pre-RE: (132,120)
+//jawaii,248,134,4	duplicate(VIP System)	VIP System#jaw	109
+//lighthalzen,154,104,4	duplicate(VIP System)	VIP System#lhz	109
+//louyang,205,105,6	duplicate(VIP System)	VIP System#lou	109
+//manuk,272,150,6	duplicate(VIP System)	VIP System#man	109
+//mid_camp,216,286,4	duplicate(VIP System)	VIP System#mid	109
+//morocc,146,89,4	duplicate(VIP System)	VIP System#mor	109
+//moscovia,226,195,4	duplicate(VIP System)	VIP System#mos	109
+//niflheim,199,180,4	duplicate(VIP System)	VIP System#nif	109
+//payon,178,109,4	duplicate(VIP System)	VIP System#pay	109
+//rachel,138,122,4	duplicate(VIP System)	VIP System#rac	109
+//splendide,198,153,4	duplicate(VIP System)	VIP System#spl	109
+//umbala,97,148,3	duplicate(VIP System)	VIP System#umb	109
+//veins,211,120,4	duplicate(VIP System)	VIP System#ve	109
+//xmas,142,139,6	duplicate(VIP System)	VIP System#xmas	109
+//yuno,164,50,4	duplicate(VIP System)	VIP System#yuno	109
+
+// --------------------------------------------------
+//	Duplicates (Renewal):
+// --------------------------------------------------
+//brasilis,199,225,4	duplicate(VIP System)	VIP System#bra	109
+//dewata,202,190,6	duplicate(VIP System)	VIP System#dew	109
+//dicastes01,196,197,6	duplicate(VIP System)	VIP System#dic	109
+//malangdo,137,116,6	duplicate(VIP System)	VIP System#mal	109
+//malaya,228,195,4	duplicate(VIP System)	VIP System#ma	109

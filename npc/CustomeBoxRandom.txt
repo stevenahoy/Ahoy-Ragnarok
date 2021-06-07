@@ -1,0 +1,8 @@
+function	script	CustomBoxUpper	{
+setarray .BoxItems[0],25194,25195,25197,25199,25202,25203,25205;
+
+set .Random, rand( getarraysize( .BoxItems ) );
+getitem .BoxItems[ .Random ], 1;
+announce "["+strcharinfo(0)+"] baru saja memperoleh ["+getitemname(.BoxItems[ .Random ])+"] dari Custom Box.",0;
+end;
+}
